@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Plus, Minus } from 'lucide-react';
+import { Plus, Minus, IndianRupee } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
 import { Product } from '@/types/product';
 import { useToast } from '@/hooks/use-toast';
@@ -50,9 +50,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="flex items-center mt-1">
           <div className="flex-1">
             <div className="flex items-center">
-              <span className="font-bold text-quickmart-darkGray">${product.discountedPrice.toFixed(2)}</span>
+              <span className="flex items-center font-bold text-quickmart-darkGray">
+                <IndianRupee className="h-3 w-3 mr-0.5" />
+                {(product.discountedPrice * 83).toFixed(2)}
+              </span>
               {product.discount > 0 && (
-                <span className="text-sm text-gray-400 line-through ml-2">${product.price.toFixed(2)}</span>
+                <span className="flex items-center text-sm text-gray-400 line-through ml-2">
+                  <IndianRupee className="h-3 w-3 mr-0.5" />
+                  {(product.price * 83).toFixed(2)}
+                </span>
               )}
             </div>
           </div>

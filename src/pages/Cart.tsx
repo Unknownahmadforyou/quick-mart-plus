@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/useCart';
-import { Plus, Minus, ArrowLeft, Trash2 } from 'lucide-react';
+import { Plus, Minus, ArrowLeft, Trash2, IndianRupee } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Cart = () => {
@@ -22,11 +21,9 @@ const Cart = () => {
   const { toast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
   
-  // Handle checkout
   const handleCheckout = () => {
     setIsProcessing(true);
     
-    // Simulate checkout process
     setTimeout(() => {
       toast({
         title: "Order placed successfully!",
@@ -40,7 +37,6 @@ const Cart = () => {
     }, 2000);
   };
   
-  // Check if cart is empty
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen flex flex-col">
@@ -77,7 +73,6 @@ const Cart = () => {
           <h1 className="text-3xl font-bold mb-8">Your Cart</h1>
           
           <div className="flex flex-col lg:flex-row gap-8">
-            {/* Cart items */}
             <div className="flex-grow">
               <div className="bg-white rounded-lg shadow-sm">
                 {cartItems.map((item) => (
@@ -95,9 +90,15 @@ const Cart = () => {
                         <h3 className="font-medium">{item.product.name}</h3>
                         <p className="text-sm text-gray-500">{item.product.weight}</p>
                         <div className="flex items-center mt-1">
-                          <span className="font-bold mr-2">${item.product.discountedPrice.toFixed(2)}</span>
+                          <span className="flex items-center font-bold mr-2">
+                            <IndianRupee className="h-3 w-3 mr-0.5" />
+                            {(item.product.discountedPrice * 83).toFixed(2)}
+                          </span>
                           {item.product.discount > 0 && (
-                            <span className="text-sm text-gray-400 line-through">${item.product.price.toFixed(2)}</span>
+                            <span className="flex items-center text-sm text-gray-400 line-through">
+                              <IndianRupee className="h-3 w-3 mr-0.5" />
+                              {(item.product.price * 83).toFixed(2)}
+                            </span>
                           )}
                         </div>
                       </div>
@@ -144,7 +145,6 @@ const Cart = () => {
               </div>
             </div>
             
-            {/* Order summary */}
             <div className="w-full lg:w-80">
               <div className="bg-white rounded-lg shadow-sm p-6 sticky top-20">
                 <h2 className="text-lg font-bold mb-4">Order Summary</h2>
@@ -152,15 +152,24 @@ const Cart = () => {
                 <div className="space-y-3 mb-4">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Subtotal</span>
-                    <span>${getSubtotal().toFixed(2)}</span>
+                    <span className="flex items-center">
+                      <IndianRupee className="h-3 w-3 mr-0.5" />
+                      {(getSubtotal() * 83).toFixed(2)}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Delivery Fee</span>
-                    <span>${getDeliveryFee().toFixed(2)}</span>
+                    <span className="flex items-center">
+                      <IndianRupee className="h-3 w-3 mr-0.5" />
+                      {(getDeliveryFee() * 83).toFixed(2)}
+                    </span>
                   </div>
                   <div className="border-t pt-3 flex justify-between font-bold">
                     <span>Total</span>
-                    <span>${getTotal().toFixed(2)}</span>
+                    <span className="flex items-center">
+                      <IndianRupee className="h-3 w-3 mr-0.5" />
+                      {(getTotal() * 83).toFixed(2)}
+                    </span>
                   </div>
                 </div>
                 
@@ -173,7 +182,7 @@ const Cart = () => {
                 </Button>
                 
                 <p className="text-xs text-center text-gray-500 mt-4">
-                  Free delivery on orders over $30
+                  Free delivery on orders over ₹2,490
                 </p>
               </div>
             </div>
