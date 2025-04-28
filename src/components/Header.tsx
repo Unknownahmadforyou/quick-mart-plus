@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,6 +5,7 @@ import { ShoppingCart, MapPin, Search, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCart } from '@/hooks/useCart';
 import LocationSelector from './LocationSelector';
+import AuthButton from './AuthButton';
 
 const Header = () => {
   const { cartItems } = useCart();
@@ -38,6 +38,11 @@ const Header = () => {
                 className="pl-10 w-full bg-gray-50"
               />
             </div>
+          </div>
+          
+          {/* Auth button (desktop) */}
+          <div className="hidden md:block">
+            <AuthButton />
           </div>
           
           {/* Cart button */}
@@ -119,6 +124,11 @@ const Header = () => {
                 <Link to="/offers" className="block py-2 font-medium" onClick={() => setIsMenuOpen(false)}>
                   Offers
                 </Link>
+              </li>
+              <li>
+                <div className="py-2">
+                  <AuthButton />
+                </div>
               </li>
             </ul>
           </div>

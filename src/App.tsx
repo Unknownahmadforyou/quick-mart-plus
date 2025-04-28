@@ -10,6 +10,7 @@ import CategoryPage from "./pages/CategoryPage";
 import AllCategories from "./pages/AllCategories";
 import AllProducts from "./pages/AllProducts";
 import NotFound from "./pages/NotFound";
+import Auth from "./pages/Auth";
 import { CartProvider } from "./hooks/useCart";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/category/:id" element={<CategoryPage />} />
             <Route path="/categories" element={<AllCategories />} />
             <Route path="/products" element={<AllProducts />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
